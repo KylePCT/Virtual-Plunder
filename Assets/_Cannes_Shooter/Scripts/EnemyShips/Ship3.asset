@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57934b6e931b21439894a224f2dfa92, type: 3}
+  m_Name: Ship3
+  m_EditorClassIdentifier: 
+  name: New Ship
+  model: {fileID: 8878347861276290725, guid: d229f1ad37ec73840baa117824ae62ce, type: 3}
+  type: 0
+  location: 1
+  health: 100
+  speed: 0.78
+  pointsWhenHit: 10
+  pointsWhenKilled: 100
+  damageOnHit: 20
