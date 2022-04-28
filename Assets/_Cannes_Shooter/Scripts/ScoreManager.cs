@@ -13,8 +13,8 @@ namespace Cannes_Shooter
         [Header("Parameters")]
         public float multiplierDecreasesAfterSeconds = 20f;
 
-        private int scoreValue;
-        private int multiplierValue;
+        [HideInInspector] public int scoreValue;
+        [HideInInspector] public int multiplierValue;
 
         // Start is called before the first frame update
         void Start()
@@ -29,31 +29,27 @@ namespace Cannes_Shooter
         // Update is called once per frame
         void Update()
         {
-            StartCoroutine(reduceMultiplier());
+
         }
 
         public void addPoints(int amount)
         {
-            Debug.Log("Adding " + amount + " points!");
             scoreValue = scoreValue + (amount * multiplierValue);
             scoreText.text = "Score: " + scoreValue;
+            Debug.Log("Adding " + amount + " points!");
         }
 
         public void addOntoMultiplier(int amount)
         {
             multiplierValue = multiplierValue + amount;
             multiplierText.text = "x" + multiplierValue;
+            Debug.Log("Adding " + amount + " to multiplier! It is now " + multiplierValue + "!");
         }
 
-        public IEnumerator reduceMultiplier()
+        public void setMultiplierTo(int amount)
         {
-            yield return new WaitForSeconds(multiplierDecreasesAfterSeconds);
-            
-            if (multiplierValue != 1)
-            {
-                multiplierValue = multiplierValue - 1;
-                StartCoroutine(reduceMultiplier());
-            }
+            multiplierValue = amount;
+            multiplierText.text = "x" + multiplierValue;
         }
     }
 }

@@ -15,6 +15,10 @@ namespace Cannes_Shooter
         [Header("Parameters")]
         [Tooltip("The sensitivity of the turning of the camera using the mouse.")]
         public float mouseSensitivity = 100f;
+        public Vector2 verticalRestrictions = new Vector2(-90f, 90f);
+        public Vector2 horizontalRestrictions = new Vector2(-50f, 50f);
+
+        [Header("Physical Parameters")]
         public Transform body;
         float camRotation = 0f;
 
@@ -32,10 +36,14 @@ namespace Cannes_Shooter
             float _mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
             camRotation -= _mouseY; //Stops flipping the camera when using +=.
-            camRotation = Mathf.Clamp(camRotation, -90f, 90f); //Clamp vertical movement.
+            camRotation = Mathf.Clamp(camRotation, verticalRestrictions.x, verticalRestrictions.y); //Clamp vertical movement.
 
             transform.localRotation = Quaternion.Euler(camRotation, 0f, 0f); //Vertical movement.
             body.Rotate(Vector3.up * _mouseX); //Horizontal movement.
+
+            Quaternion _rot = transform.localRotation;
+            _rot.eulerAngles = new Vector3(0f, Mathf.Clamp(transform.eulerAngles.y, horizontalRestrictions.x, horizontalRestrictions.y), 0f);
+            body.localRotation = _rot;
 
         }
     }

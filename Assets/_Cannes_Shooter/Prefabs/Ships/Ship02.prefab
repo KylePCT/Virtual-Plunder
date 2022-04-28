@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8077665417172505388}
+  - component: {fileID: -4659850760777323493}
   - component: {fileID: 8077665417172505389}
   m_Layer: 0
   m_Name: Ship02
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &-4659850760777323493
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077665417172505390}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8077665417172505389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,3 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 11400000, guid: 3124d07baa63aa64c8b930e2ec384e5f, type: 2}
+  lootDrop:
+  - {fileID: 5680230627834844853, guid: 0c35108827bc18a42a2c4d23fb4eea66, type: 3}
+  shipHealth: 0

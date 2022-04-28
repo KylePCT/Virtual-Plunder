@@ -10,8 +10,10 @@ namespace Cannes_Shooter
         public string dropName = "New Droppable";
         public GameObject droppableModel;
 
-        public int droppableHealth = 10;
-        public int pointsWhenDestroyed = 100;
+        public int health = 10;
+        public int pointsOnDestruction = 50;
 
+        public enum dropEffect { DoublePoints, DoubleBalls, SlowMotion, ChainedCannonBalls, FireBalls, IceBalls }
+        public dropEffect effect = dropEffect.DoublePoints;
     }
 }

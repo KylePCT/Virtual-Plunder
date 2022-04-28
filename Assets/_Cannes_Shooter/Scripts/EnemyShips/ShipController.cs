@@ -6,15 +6,17 @@ namespace Cannes_Shooter
 {
     public class ShipController : MonoBehaviour
     {
-        public ScoreManager scoreManager;
+        private ScoreManager scoreManager;
+        private LootboxController lootboxController;
         public Ship ship;
+        public GameObject[] lootDrop;
 
         private string shipName;
         private Ship.shipType shipType;
         private Ship.shipSpawnLocation shipLocation;
         private float damageOnHit;
 
-        private float shipHealth;
+        [SerializeField] private float shipHealth;
         private float shipSpeed;
 
         private MeshFilter meshFilter;
@@ -44,12 +46,6 @@ namespace Cannes_Shooter
 
             if (meshRenderer == null) meshRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
             meshRenderer.material = ship.model.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-
-            if (sphereCollider == null) sphereCollider = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
-            sphereCollider.radius = 10f;
-            sphereCollider.isTrigger = true;
-
-            //StartCoroutine(destroyMe());
         }
 
         // Update is called once per frame
@@ -58,32 +54,33 @@ namespace Cannes_Shooter
             transform.Translate(0, 0, 3f * Time.deltaTime * shipSpeed);
         }
 
-        ////Destroy object after set time.
-        //public IEnumerator destroyMe()
-        //{
-        //    yield return new WaitForSeconds(21f);
-        //    Destroy(gameObject);
-        //}
-
-        private void OnTriggerEnter(Collider col)
+        public void shipIsHit()
         {
             Debug.Log("Hit!" + gameObject.name);
 
-            if (col.CompareTag("Coconut"))
+            if (shipHealth > damageOnHit)
             {
-                if (shipHealth >= 20f)
-                {
-                    shipHealth = shipHealth - damageOnHit;
-                    scoreManager.addPoints(10);
-                }
-                else
-                {
-                    scoreManager.addPoints(100);
-                    scoreManager.addOntoMultiplier(1);
-                    Destroy(gameObject);
-                }
-                Destroy(col);
+                shipHealth = shipHealth - damageOnHit;
+                scoreManager.addPoints(10);
             }
+            else
+            {
+                scoreManager.addPoints(100);
+                scoreManager.addOntoMultiplier(1);
+                spawnCrate();
+                StartCoroutine(destroyAfterSeconds(2));
+            }
+        }
+
+        private void spawnCrate()
+        {
+            Instantiate(lootDrop[Random.Range(0, lootDrop.Length)], this.transform.position, this.transform.rotation);
+        }
+
+        private IEnumerator destroyAfterSeconds(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            Destroy(gameObject);
         }
     }
 }
