@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesInWave:
   - {fileID: 8077665417172505390, guid: d6aee9889fa6fed41a71a56293196c9d, type: 3}
+  - {fileID: 8077665417172505390, guid: 6c2ea626aa4326e4ca0a1bd2e84afee5, type: 3}
   numberToSpawn: 1

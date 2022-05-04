@@ -10,11 +10,15 @@ namespace Cannes_Shooter
         public float timeRemaining = 120f;
         public bool timerIsRunning = false;
         public TextMeshProUGUI timeText;
+        public GameObject endgameUI;
+        private MainMenu menu;
+
         private void Start()
         {
-            // Starts the timer automatically
-            timerIsRunning = true;
+            timerIsRunning = false;
+            menu = FindObjectOfType<MainMenu>();
         }
+
         void Update()
         {
             if (timerIsRunning)
@@ -29,6 +33,7 @@ namespace Cannes_Shooter
                     Debug.Log("Time has run out!");
                     timeRemaining = 0;
                     timerIsRunning = false;
+                    menu.showEndGameUI();
                 }
             }
         }

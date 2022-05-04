@@ -41,12 +41,18 @@ namespace Cannes_Shooter
         {
             switch(loc)
             {
-                case Ship.shipSpawnLocation.Left:
+                case Ship.shipSpawnLocation.Left_Front:
                     return spawnPoints[0];
-                case Ship.shipSpawnLocation.Right:
+                case Ship.shipSpawnLocation.Left_Middle:
                     return spawnPoints[1];
-                case Ship.shipSpawnLocation.Middle:
+                case Ship.shipSpawnLocation.Left_Back:
                     return spawnPoints[2];
+                case Ship.shipSpawnLocation.Right_Front:
+                    return spawnPoints[3];
+                case Ship.shipSpawnLocation.Right_Middle:
+                    return spawnPoints[4];
+                case Ship.shipSpawnLocation.Right_Back:
+                    return spawnPoints[5];
                 default:
                     return spawnPoints[0];
             }

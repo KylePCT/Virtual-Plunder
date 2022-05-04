@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Ship2
   m_EditorClassIdentifier: 
   name: New Ship
-  model: {fileID: 2177593845947418193, guid: cda8a1a00d71acf479ea4b4e9275bc17, type: 3}
   type: 0
-  location: 2
+  location: 4
   health: 100
-  speed: 1
+  minSpeed: 0.1
+  maxSpeed: 4
   pointsWhenHit: 10
   pointsWhenKilled: 100
   damageOnHit: 75

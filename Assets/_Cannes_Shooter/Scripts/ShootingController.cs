@@ -7,6 +7,7 @@ namespace Cannes_Shooter
     public class ShootingController : MonoBehaviour
     {
         private ScoreManager scoreManager;
+        private CameraController camController;
 
         [Header("Physical Parameters")]
         public Transform pointToShootFrom;
@@ -15,8 +16,9 @@ namespace Cannes_Shooter
 
         [Header("Gun Properties")]
         public float firingCooldown = 1.0f;
+        public float firingPower = 200f;
         public float firingRange = 200f; //Distance for hit.
-        private bool canFire = true;
+        public bool canFire = true;
 
         [Header("Cannon Visuals")]
         public ParticleSystem firingCannon;
@@ -24,6 +26,7 @@ namespace Cannes_Shooter
         void Start()
         {
             scoreManager = FindObjectOfType<ScoreManager>();
+            camController = FindObjectOfType<CameraController>();
         }
 
         // Update is called once per frame
@@ -71,13 +74,10 @@ namespace Cannes_Shooter
                 Debug.Log("Missed!");
             }
 
-
-
-
-            //Older physics-based instantiate code.
-            //GameObject _cannonball;
-            //_cannonball = Instantiate(objToShoot, pointToShootFrom.transform.position, pointToShootFrom.transform.rotation);
-            //_cannonball.GetComponent<Rigidbody>().AddForce(transform.forward * firingPower, ForceMode.Impulse);
+            GameObject _cannonball;
+            _cannonball = Instantiate(objToShoot, pointToShootFrom.transform.position, pointToShootFrom.transform.rotation);
+            firingCannon.Play();
+            StartCoroutine(camController.cameraShake(.3f, .3f));
         }
 
         private IEnumerator startCooldown()

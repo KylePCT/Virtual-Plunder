@@ -7,6 +7,9 @@ TagManager:
   - Coconut
   - Ship
   - Lootbox
+  - Land_Sand
+  - Land_Rock
+  - Water
   layers:
   - Default
   - TransparentFX

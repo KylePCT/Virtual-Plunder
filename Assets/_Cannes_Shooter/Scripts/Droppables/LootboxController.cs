@@ -29,16 +29,28 @@ namespace Cannes_Shooter
             dropEffect = droppable.effect.ToString();
             boxHealth = droppable.health;
             boxPoints = droppable.pointsOnDestruction;
+
+            StartCoroutine(lootboxDespawns(8));
+
+            this.gameObject.transform.localScale = Vector3.zero;
+            LeanTween.scale(this.gameObject, new Vector3(2, 2, 2), 1);
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            transform.Rotate(.1f, .1f, .1f * Time.fixedDeltaTime);
         }
 
         public void lootboxIsHit()
         {
+            StartCoroutine(delayBeforePoints(1));
+        }
+
+        private IEnumerator delayBeforePoints(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+
             Debug.Log("Hit!" + gameObject.name);
 
             scoreManager.addPoints(boxPoints);
@@ -50,11 +62,22 @@ namespace Cannes_Shooter
         {
             GameObject _drop;
             _drop = Instantiate(droppable.droppableModel.gameObject, this.transform.position, this.transform.rotation);
-            _drop.AddComponent<Rigidbody>();
-            _drop.GetComponent<Rigidbody>().AddForce(Vector3.up * 500f);
+            //_drop.AddComponent<Rigidbody>();
+            //_drop.GetComponent<Rigidbody>().AddForce(Vector3.up * 500f);
             StartCoroutine(destroyDropVisual(_drop));
             
             activateDropEffect();
+        }
+
+        private IEnumerator lootboxDespawns(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            LeanTween.scale(this.gameObject, new Vector3(0, 0, 0), .1f).setOnComplete(destroyMe);
+        }
+
+        private void destroyMe()
+        {
+            Destroy(gameObject);
         }
 
         private IEnumerator destroyDropVisual(GameObject drop)

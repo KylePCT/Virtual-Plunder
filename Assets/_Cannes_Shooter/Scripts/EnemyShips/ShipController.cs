@@ -23,6 +23,9 @@ namespace Cannes_Shooter
         private MeshRenderer meshRenderer;
         private SphereCollider sphereCollider;
 
+        [Header("Ship Visuals")]
+        public ParticleSystem shipExplosion;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -32,20 +35,24 @@ namespace Cannes_Shooter
             shipName = ship.name;
             shipType = ship.type;
             shipHealth = ship.health;
-            shipSpeed = ship.speed;
+            shipSpeed = Random.Range(ship.minSpeed, ship.maxSpeed);
             shipLocation = ship.location;
             damageOnHit = ship.damageOnHit;
 
             //Get the model and material data.
             if (GetComponent<MeshFilter>() != null) meshFilter = GetComponent<MeshFilter>();
             if (GetComponent<MeshRenderer>() != null) meshRenderer = GetComponent<MeshRenderer>();
+
+            //Incase the sphereCollider isn't active.
             if (GetComponent<SphereCollider>() != null) sphereCollider = GetComponent<SphereCollider>();
+            else
+            {
+                sphereCollider = this.gameObject.AddComponent<SphereCollider>();
+                sphereCollider = GetComponent<SphereCollider>();
+                sphereCollider.radius = 3f;
+                sphereCollider.isTrigger = true;
+            }
 
-            if (meshFilter == null) meshFilter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
-            meshFilter.mesh = ship.model.gameObject.GetComponent<MeshFilter>().sharedMesh;
-
-            if (meshRenderer == null) meshRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
-            meshRenderer.material = ship.model.gameObject.GetComponent<MeshRenderer>().sharedMaterial;
         }
 
         // Update is called once per frame
@@ -56,7 +63,16 @@ namespace Cannes_Shooter
 
         public void shipIsHit()
         {
+            StartCoroutine(delayBeforePoints(1));
+        }
+
+        private IEnumerator delayBeforePoints(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+
             Debug.Log("Hit!" + gameObject.name);
+
+            shipExplosion.Play();
 
             if (shipHealth > damageOnHit)
             {
@@ -81,6 +97,15 @@ namespace Cannes_Shooter
         {
             yield return new WaitForSeconds(seconds);
             Destroy(gameObject);
+        }
+
+        //Destroy the cannonball if it does hit the ship.
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.CompareTag("Coconut"))
+            {
+                Destroy(col);
+            }
         }
     }
 }
