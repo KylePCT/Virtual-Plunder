@@ -74,6 +74,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Crate_01
       objectReference: {fileID: 0}
+    - target: {fileID: 100574, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
+      propertyPath: m_TagString
+      value: Lootbox
+      objectReference: {fileID: 0}
     - target: {fileID: 410930, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -158,7 +162,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5680230628216685557}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.62634635, y: 0.62634635, z: 0.62634635}

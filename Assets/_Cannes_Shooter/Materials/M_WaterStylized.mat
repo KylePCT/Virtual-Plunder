@@ -90,7 +90,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Foam_Amount: 0.7
-    - _Foam_Cutoff: 4.43
+    - _Foam_Cutoff: 6.9
     - _Foam_Scale: 829.9
     - _Foam_Speed: 0.92
     - _GlossMapScale: 0

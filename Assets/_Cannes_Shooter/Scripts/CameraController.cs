@@ -16,6 +16,7 @@ namespace Cannes_Shooter
         public Transform playerBody;
         public GameObject cannon;
         float camRotation = 0f;
+        private Vector3 originalPos;
 
         [Header("Camera Effects")]
         public AnimationCurve cameraShakeCurve;
@@ -46,19 +47,24 @@ namespace Cannes_Shooter
 
         public IEnumerator cameraShake (float duration, float magnitude)
         {
-            Vector3 _originalPos = transform.localPosition;
+            originalPos = transform.localPosition;
             float _elapsed = 0.0f;
 
             while (_elapsed < duration)
             {
                 _elapsed += Time.deltaTime;
                 float _strength = cameraShakeCurve.Evaluate(_elapsed / duration);
-                transform.localPosition = _originalPos + Random.insideUnitSphere * _strength;
+                transform.localPosition = originalPos + Random.insideUnitSphere * _strength;
 
                 yield return null;
             }
 
-            transform.localPosition = _originalPos;
+            transform.localPosition = originalPos;
+        }
+
+        public void resetCamPos()
+        {
+            transform.localPosition = originalPos;
         }
     }
 }

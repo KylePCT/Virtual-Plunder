@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Cannes_Shooter/Scenes/MainScene.unity
+    guid: 1e7d1814283dda24f92b84572dbb2c4c
   m_configObjects: {}

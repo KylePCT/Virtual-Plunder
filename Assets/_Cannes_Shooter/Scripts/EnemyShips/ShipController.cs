@@ -84,13 +84,14 @@ namespace Cannes_Shooter
                 scoreManager.addPoints(100);
                 scoreManager.addOntoMultiplier(1);
                 spawnCrate();
+                LeanTween.scale(gameObject, Vector3.zero, 2f);
                 StartCoroutine(destroyAfterSeconds(2));
             }
         }
 
         private void spawnCrate()
         {
-            Instantiate(lootDrop[Random.Range(0, lootDrop.Length)], this.transform.position, this.transform.rotation);
+            Instantiate(lootDrop[Random.Range(0, lootDrop.Length)], this.transform.position, this.transform.rotation, null);
         }
 
         private IEnumerator destroyAfterSeconds(int seconds)

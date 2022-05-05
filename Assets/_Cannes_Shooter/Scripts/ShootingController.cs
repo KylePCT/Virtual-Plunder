@@ -18,6 +18,7 @@ namespace Cannes_Shooter
         public float firingCooldown = 1.0f;
         public float firingPower = 200f;
         public float firingRange = 200f; //Distance for hit.
+        [HideInInspector] public GameObject raycastHitObj;
         public bool canFire = true;
 
         [Header("Cannon Visuals")]
@@ -37,8 +38,12 @@ namespace Cannes_Shooter
                 if (!canFire) return;
 
                 Shoot();
+                camController.resetCamPos();
                 StartCoroutine(startCooldown());
             }
+
+            //Just so you can't spam life away.
+            if (firingCooldown < .51f) firingCooldown = .5f;
         }
 
         public void Shoot()
@@ -51,21 +56,10 @@ namespace Cannes_Shooter
                 Debug.DrawRay(pointToShootFrom.transform.position, pointToShootFrom.transform.forward * firingRange, Color.green, 10f);
                 Debug.Log(hit.transform.name);
 
-                //If it hits the ships...
-                if (hit.transform.tag == "Ship")
-                {
-                    hit.transform.gameObject.GetComponent<ShipController>().shipIsHit();
-                }
-                else if (hit.transform.tag == "Lootbox")
-                {
-                    hit.transform.gameObject.GetComponentInParent<LootboxController>().lootboxIsHit();
-                }
-                //If the ray hits something that isn't the ships.
-                else
-                {
-                    scoreManager.setMultiplierTo(1);
-                    Debug.Log("Missed!");
-                }
+                GameObject _cannonball;
+                _cannonball = Instantiate(objToShoot, pointToShootFrom.transform.position, pointToShootFrom.transform.rotation, null);
+                firingCannon.Play();
+                StartCoroutine(camController.cameraShake(.3f, .3f));
             }
             //If the raycast hits nothing.
             else
@@ -73,11 +67,6 @@ namespace Cannes_Shooter
                 scoreManager.setMultiplierTo(1);
                 Debug.Log("Missed!");
             }
-
-            GameObject _cannonball;
-            _cannonball = Instantiate(objToShoot, pointToShootFrom.transform.position, pointToShootFrom.transform.rotation);
-            firingCannon.Play();
-            StartCoroutine(camController.cameraShake(.3f, .3f));
         }
 
         private IEnumerator startCooldown()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class KrakenController : MonoBehaviour
 {
     public GameObject krakenBoss;
-
     private GameObject spawnedKrakenBoss;
 
     public void summonKrakenBoss(Transform position)

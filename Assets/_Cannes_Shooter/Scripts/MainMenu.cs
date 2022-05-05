@@ -23,6 +23,7 @@ namespace Cannes_Shooter
 
         public GameObject gameMenu;
         public GameObject endMenu;
+        private Vector3 endMenuPos;
         [HideInInspector] public int endScore;
         public TextMeshProUGUI endScoreText;
 
@@ -68,6 +69,8 @@ namespace Cannes_Shooter
             highscoreText.text = highScore.ToString();
 
             score = FindObjectOfType<ScoreManager>();
+            endMenuPos = endMenu.transform.position;
+            endMenu.transform.localPosition = new Vector3(0, 2000, 0);
         }
 
         private void LateUpdate()
@@ -151,7 +154,7 @@ namespace Cannes_Shooter
             shoot.canFire = false;
 
             LeanTween.alphaCanvas(endMenu.GetComponent<CanvasGroup>(), 1f, .5f);
-            LeanTween.moveY(endMenu, transform.position.y - 150f, 1f);
+            LeanTween.moveY(endMenu, endMenuPos.y, 1f);
 
             endScore = score.scoreValue;
             endScoreText.text = endScore.ToString() + " Points!";

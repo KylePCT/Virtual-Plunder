@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa509ac3196bb7d4695c269b82488849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droppable: {fileID: 11400000, guid: 573c0698c7db95d46a3592281d9cf537, type: 2}
+  droppable: {fileID: 11400000, guid: c4c5ea0d6f955674c936f3ba8dc08655, type: 2}
 --- !u!54 &3429189689042639070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73,6 +73,10 @@ PrefabInstance:
     - target: {fileID: 100574, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Crate_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100574, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
+      propertyPath: m_TagString
+      value: Lootbox
       objectReference: {fileID: 0}
     - target: {fileID: 410930, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
       propertyPath: m_RootOrder
@@ -141,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 3376404, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300000, guid: bb26b3c513322df42ac051222efd4c7b, type: 3}
+      objectReference: {fileID: 4300000, guid: af7a713aa7d74c1408d9807f92892c65, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 874b300860c362f4e868ac3dafd9ef0f, type: 3}
 --- !u!4 &5680230628216376857 stripped
@@ -162,7 +166,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5680230628216685557}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.62634635, y: 0.62634635, z: 0.62634635}

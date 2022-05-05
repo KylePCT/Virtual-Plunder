@@ -21,7 +21,7 @@ namespace Cannes_Shooter
             int _spawnIndex = Random.Range(0, spawnPoints.Length);
             Transform _randomSpawn = spawnPoints[_spawnIndex];
 
-            Instantiate(ship, _randomSpawn);
+            Instantiate(ship, _randomSpawn.position, _randomSpawn.rotation, null);
         }
 
         //Transform _spawnLoc = GetSpawnPoint(ship.GetComponent<ShipController>().ship.location);
